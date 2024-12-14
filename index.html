@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facilities Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>Facilities Dashboard</h1>
+    </div>
+  </header>
+
+  <div class="main-wrapper">
+    <div id="map"></div>
+    <div id="sidebar">
+      <div class="combined-visualization">
+        <h2>Facilities per Area</h2>
+        <canvas id="combined-chart" width="1600" height="800"></canvas>
+      </div>
+      
+      <div class="infographic-container">
+        <div class="infographic-section">
+          <div class="infographic-icon">
+            <img src="https://cdn.icon-icons.com/icons2/510/PNG/512/coffee_icon-icons.com_50414.png" alt="Cafe Icon">
+          </div>
+          <div class="infographic-title">Cafe</div>
+          <div class="infographic-value" id="cafe-info">No data</div>
+        </div>
+        
+        <div class="infographic-section">
+          <div class="infographic-icon">
+            <img src="https://w7.pngwing.com/pngs/310/448/png-transparent-study-skills-education-learning-computer-icons-sc-logo-angle-hat-teacher.png" alt="Education Icon">
+          </div>
+          <div class="infographic-title">Education</div>
+          <div class="infographic-value" id="education-info">No data</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Enlarged Chart -->
+  <div id="chart-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; z-index: 9999;">
+    <div style="position: relative; width: 90%; max-width: 800px; background: #1f1f1f; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+      <button id="close-modal" style="position: absolute; top: 10px; right: 10px; background: #ff5555; color: #fff; border: none; padding: 10px; border-radius: 50%; font-size: 16px; cursor: pointer;">&times;</button>
+      <canvas id="enlarged-chart" width="800" height="400"></canvas>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

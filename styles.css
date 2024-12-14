@@ -1,0 +1,335 @@
+/* General page styling */
+body {
+  background-color: #1e1e2f;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+/* Change the Leaflet control layer icon color to light gray */
+.leaflet-control-layers-toggle {
+  background-color: #2a2d3e !important;
+}
+
+.leaflet-control-layers-selector {
+  margin-top: 2px;
+  background-color: #2a2d3e;
+  position: relative;
+  top: 1px;
+}
+
+/* Header styling */
+header {
+  position: relative;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(90deg, #2a2d3e, #3b3f54);
+  color: #ffda54;
+  text-align: center;
+  height: 10%; /* Set height relative to viewport */
+  font-size: 26px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-content {
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+/* Main layout wrapper */
+.main-wrapper {
+  display: flex;
+  flex: 1;
+  margin-top: 1px;
+  height: 90%;
+}
+
+/* Map styling */
+#map {
+  flex: 2;
+  height: 1005;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid #495057;
+}
+
+/* Sidebar styling */
+#sidebar {
+  min-width: 300px;
+  max-width: 400px;
+  height: 100%;
+  background: linear-gradient(135deg, #2a2d3e, #3b3f54);
+  padding: 25px;
+  border-left: 2px solid rgb(51, 52, 52);
+  border-radius: 0 15px 0 0;
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+}
+
+/* Sidebar heading */
+#sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffda54;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #33ffe7;
+}
+
+/* Combined Visualization Section */
+.combined-visualization {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: #2a2d3e;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease-in-out;
+}
+
+.combined-visualization:hover {
+  transform: scale(1.02);
+}
+
+.combined-visualization canvas {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Infographics Container */
+.infographic-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 25px;
+}
+
+.infographic-section {
+  text-align: center;
+  padding: 20px;
+  background: #2a2d3e;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s;
+}
+
+.infographic-section:hover {
+  transform: translateY(-5px);
+}
+
+/* Infographic content */
+.infographic-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #3b3f54;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.infographic-icon img {
+  width: 80%;
+  height: 80%;
+}
+
+.infographic-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffda54;
+  margin: 15px 0;
+}
+
+.infographic-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #e0e0e0;
+  margin-top: 10px;
+}
+
+/* Modal styling for enlarged chart */
+.chart-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #2a2d3e;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+#enlarged-chart {
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+  color: #ffda54;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.close-modal:hover {
+  color: #33ffe7;
+}
+
+/* Legend styling */
+.info.legend {
+  padding: 10px;
+  background: linear-gradient(135deg, #2a2d3e, #3b3f54); /* Matching sidebar gradient */
+  color: #ffda54; /* Consistent text color */
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Consistent shadow effect */
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.info.legend h4 {
+  margin-bottom: 10px;
+  color: #ffd333; /* Highlighted heading color */
+  font-size: 18px;
+  text-align: center;
+  border-bottom: 2px solid #ffda54; /* Subtle divider */
+  padding-bottom: 5px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2a2d3e; /* Matching sidebar sections */
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin: 5px 0;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.legend-item:hover {
+  transform: translateY(-3px); /* Lift effect on hover */
+  background: #3b3f54; /* Slightly lighter hover color */
+}
+
+.legend-item span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px; /* Softer corners */
+  border: 1px solid #495057;
+}
+
+/* Reset button */
+#reset-button {
+  background-color: #33ffe7; /* Accent color for the button */
+  color: #1e1e2f;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 15px;
+  cursor: pointer;
+  width: 100%; /* Full width button */
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#reset-button:hover {
+  background-color: #ffda54;
+  transform: scale(1.05); /* Slight scale effect */
+}
+
+/* Focus styles for accessibility */
+#reset-button:focus, .close-modal:focus {
+  outline: none;
+  box-shadow: 0 0 3px 3px rgba(51, 255, 231, 0.8); /* Highlight when focused */
+}
+
+/* Smooth transition for modal display */
+.chart-modal {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0s 0.3s;
+  visibility: hidden; /* Hidden by default */
+}
+
+.chart-modal.show {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+/* Custom scrollbar styles */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #2a2d3e;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #3b3f54;
+  border-radius: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-wrapper {
+    flex-direction: column;
+  }
+
+  #sidebar {
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  #map {
+    height: calc(100vh - 300px);
+  }
+}
