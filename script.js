@@ -88,7 +88,7 @@ const loadBusStopsLayer = (geojsonData) => {
     style: { weight: 1, opacity: 0.8 },
     pointToLayer: (feature, latlng) => L.marker(latlng, {
       icon: L.icon({
-        iconUrl: 'Symbols/bus_stop.png',
+        iconUrl: 'bus_stop.png',
         iconSize: [25, 25],
         iconAnchor: [12, 25],
         popupAnchor: [0, -25]
@@ -354,9 +354,9 @@ const createLayerControl = () => {
 
 // Load all GeoJSON data
 const loadData = () => {
-  loadGeoJSON('Park/Munich_Districts.geojson', loadDistrictData);
-  loadGeoJSON('Park/Train_network.geojson', loadTrainNetworkLayer);
-  loadGeoJSON('Park/Munich_Bus_Stops.geojson', loadBusStopsLayer);
+  loadGeoJSON('Munich_Districts.geojson', loadDistrictData);
+  loadGeoJSON('Train_network.geojson', loadTrainNetworkLayer);
+  loadGeoJSON('Munich_Bus_Stops.geojson', loadBusStopsLayer);
 };
 
 // Initialize
