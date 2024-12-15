@@ -99,7 +99,7 @@ const loadBusStopsLayer = (geojsonData) => {
     style: { weight: 1, opacity: 0.8 },
     pointToLayer: (feature, latlng) => L.marker(latlng, {
       icon: L.icon({
-        iconUrl: 'Symbols/bus_stop.png',
+        iconUrl: 'bus_stop.png',
         iconSize: [25, 25],
         iconAnchor: [12, 25],
         popupAnchor: [0, -25]
