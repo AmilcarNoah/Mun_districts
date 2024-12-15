@@ -263,7 +263,7 @@ h1 {
 
 /* Reset button */
 #reset-button {
-  background-color: #33ffe7; /* Accent color for the button */
+  background-color: #50556c; /* Accent color for the button */
   color: #1e1e2f;
   border: none;
   border-radius: 8px;
@@ -317,6 +317,33 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
+#toggle-legend {
+  background-color: #50556c; /* Accent color for the button */
+  color: #1e1e2f; /* Text color */
+  border: none; /* No border */
+  border-radius: 8px; /* Match border radius */
+  padding: 10px 15px; /* Padding for the button */
+  font-size: 14px; /* Match font size */
+  font-weight: bold; /* Match font weight */
+  margin-top: 15px; /* Match margin */
+  cursor: pointer; /* Pointer cursor on hover */
+  width: 100%; /* Full width button */
+  text-align: center; /* Center text */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+#toggle-legend:hover {
+  background-color: #ffda54; /* Change background color on hover */
+  transform: scale(1.05); /* Slight scale effect */
+}
+
+/* Focus styles for accessibility */
+#toggle-legend:focus {
+  outline: none;
+  /* box-shadow: 0 0 3px 3px rgba(51, 255, 231, 0.8); Highlight when focused */
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .main-wrapper {
@@ -333,3 +360,5 @@ body::-webkit-scrollbar-thumb {
     height: calc(100vh - 300px);
   }
 }
+
+
