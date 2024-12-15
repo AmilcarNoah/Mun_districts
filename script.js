@@ -66,7 +66,9 @@ const loadDistrictData = (geojsonData) => {
 };
 
 // Load train network data
+// Load train network data
 const loadTrainNetworkLayer = (geojsonData) => {
+  // Create the train layer
   trainLayer = L.geoJSON(geojsonData, {
     style: () => ({
       color: '#fc2680',
@@ -76,11 +78,20 @@ const loadTrainNetworkLayer = (geojsonData) => {
     })
   });
 
-  // Set zIndex for train network layer to be above district layer
-  trainLayer.setZIndex(1); // Ensure train network is above district layer
+  // Check if the trainLayer was successfully created
+  if (trainLayer) {
+    // Set the zIndex after the layer is created
+    trainLayer.setZIndex(1); // Ensure the train network is above district layer
 
-  createLayerControl();
+    // Do not add the layer to the map here
+    // trainLayer.addTo(map); // This line is removed
+  } else {
+    console.error('Failed to create the train network layer');
+  }
+
+  createLayerControl(); // Create the layer control after the layer is created
 };
+
 
 // Load bus stops data
 const loadBusStopsLayer = (geojsonData) => {
@@ -88,7 +99,7 @@ const loadBusStopsLayer = (geojsonData) => {
     style: { weight: 1, opacity: 0.8 },
     pointToLayer: (feature, latlng) => L.marker(latlng, {
       icon: L.icon({
-        iconUrl: 'bus_stop.png',
+        iconUrl: 'Symbols/bus_stop.png',
         iconSize: [25, 25],
         iconAnchor: [12, 25],
         popupAnchor: [0, -25]
@@ -96,12 +107,17 @@ const loadBusStopsLayer = (geojsonData) => {
     })
   });
 
-  // Set zIndex for bus stops layer to be above district layer
-  busStopsLayer.setZIndex(2); // Ensure bus stops are above district layer
+  // Check if busStopsLayer is created successfully
+  if (busStopsLayer) {
+    // Set zIndex for bus stops layer to be above district layer
+    busStopsLayer.setZIndex(2); // Ensure bus stops are above district layer
 
-  createLayerControl();
-  setBusStopsLayerVisibility(map.getZoom());
-  map.on('zoomend', () => setBusStopsLayerVisibility(map.getZoom()));
+    createLayerControl();
+    setBusStopsLayerVisibility(map.getZoom());
+    map.on('zoomend', () => setBusStopsLayerVisibility(map.getZoom()));
+  } else {
+    console.error("Bus stops layer could not be created.");
+  }
 };
 
 // Set visibility of bus stops layer based on zoom level
@@ -263,14 +279,15 @@ const createLegend = () => {
     const div = L.DomUtil.create('div', 'info legend');
     div.innerHTML = `
       <h4>Legend</h4>
-      <h5>Percentage of District<br> covered by Parks (%)</h5>
-      <div id="legend-content"></div>
-      <div class="legend-symbols">
-        <h5>Symbols:</h5>
-        <div><span class="train-line" style="background-color: #fc2680;"></span> Train Network</div>
-        <div><img src="Symbols/bus_stop.png" alt="Bus Stop" style="width: 20px; height: 20px;"> Bus Stops</div>
+      <h5 id="percentage-info" style="display: none;">Percentage of District<br> covered by Parks (%)</h5>
+      <div id="legend-content" style="display: none;"></div>
+      <div class="legend-symbols" style="display: none;">
+      
+        <div><span class="train-line" style="background-color: #fc2680;"></span><span style="float: right;">Train Network</span></div>
+        <div><img src="Symbols/bus_stop.png" alt="Bus Stop" style="width: 20px; height: 20px;">  <span style="float: right;">Bus Stops</span></div>
       </div>
-      <button id="reset-button">Reset</button>
+      <button id="reset-button" style="display: none;">Reset</button>
+      <button id="toggle-legend">Expand</button>
     `;
     return div;
   };
@@ -278,6 +295,29 @@ const createLegend = () => {
   legend.addTo(map);
   generateLegendContent();
   document.getElementById('reset-button').addEventListener('click', resetLayers);
+
+  // Add functionality to minimize/expand the legend
+  document.getElementById('toggle-legend').addEventListener('click', () => {
+    const legendContent = document.getElementById('legend-content');
+    const button = document.getElementById('toggle-legend');
+    const legendSymbols = document.querySelector('.legend-symbols');
+    const resetButton = document.getElementById('reset-button');
+    const percentageInfo = document.getElementById('percentage-info');
+    
+    if (legendContent.style.display === 'none') {
+      legendContent.style.display = 'block';
+      legendSymbols.style.display = 'block';
+      resetButton.style.display = 'inline-block'; // Show reset button when expanded
+      percentageInfo.style.display = 'block'; // Show percentage info when expanded
+      button.innerText = 'Collapse';
+    } else {
+      legendContent.style.display = 'none';
+      legendSymbols.style.display = 'none';
+      resetButton.style.display = 'none'; // Hide reset button when collapsed
+      percentageInfo.style.display = 'none'; // Hide percentage info when collapsed
+      button.innerText = 'Expand';
+    }
+  });
 };
 
 // Add a style for the train line
@@ -335,12 +375,21 @@ const resetLayers = () => {
     }
   });
 
-  // Ensure the district layer is always below
-  if (districtLayer) districtLayer.setZIndex(0);
+  // Remove bus stops and train layers if they are currently on the map
+  if (trainLayer && map.hasLayer(trainLayer)) {
+    map.removeLayer(trainLayer);
+  }
+  if (busStopsLayer && map.hasLayer(busStopsLayer)) {
+    map.removeLayer(busStopsLayer);
+  }
 
-  // Reapply zIndex for train and bus layers
-  if (trainLayer) trainLayer.setZIndex(1);
-  if (busStopsLayer) busStopsLayer.setZIndex(2);
+  // Ensure the district layer is always on the map and below others
+  if (districtLayer) {
+    if (!map.hasLayer(districtLayer)) {
+      map.addLayer(districtLayer);
+    }
+    districtLayer.setZIndex(0); // Ensure it's below other layers
+  }
 
   // Reapply the correct layer stack after reset
   map.getPanes().overlayPane.appendChild(map.getPanes().overlayPane.firstChild);
