@@ -99,7 +99,7 @@ const loadBusStopsLayer = (geojsonData) => {
     style: { weight: 1, opacity: 0.8 },
     pointToLayer: (feature, latlng) => L.marker(latlng, {
       icon: L.icon({
-        iconUrl: 'bus_stop.png',
+        iconUrl: 'Symbols/bus_stop.png',
         iconSize: [25, 25],
         iconAnchor: [12, 25],
         popupAnchor: [0, -25]
@@ -166,6 +166,25 @@ const displayInfographics = (feature) => {
 const closeSidebar = () => {
   document.getElementById('sidebar').style.display = 'none';
 };
+
+
+//////Accordion
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null; // Collapse the panel
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px"; // Expand the panel
+    }
+  });
+}
 
 // Update the combined chart
 const updateCombinedChart = (cafeValues, educationValues) => {
@@ -403,9 +422,9 @@ const createLayerControl = () => {
 
 // Load all GeoJSON data
 const loadData = () => {
-  loadGeoJSON('Munich_Districts.geojson', loadDistrictData);
-  loadGeoJSON('Train_network.geojson', loadTrainNetworkLayer);
-  loadGeoJSON('Munich_Bus_Stops.geojson', loadBusStopsLayer);
+  loadGeoJSON('Park/map.geojson', loadDistrictData);
+  loadGeoJSON('Park/Train_network.geojson', loadTrainNetworkLayer);
+  loadGeoJSON('Park/Munich_Bus_Stops.geojson', loadBusStopsLayer);
 };
 
 // Initialize
