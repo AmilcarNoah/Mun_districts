@@ -12,38 +12,41 @@
 <body>
   <header>
     <div class="header-content">
-      <h1>Facilities in Munich</h1>
+      <h1>Facilities Dashboard</h1>
     </div>
   </header>
 
   <div class="main-wrapper">
     <div id="map"></div>
     <div id="sidebar">
-      <div class="combined-visualization">
-        <h2>Facilities per Area</h2>
-        <canvas id="combined-chart" width="1600" height="800"></canvas>
-      </div>
-      
-      <div class="infographic-container">
-        <div class="infographic-section">
-          <div class="infographic-icon">
-            <img src="https://cdn.icon-icons.com/icons2/510/PNG/512/coffee_icon-icons.com_50414.png" alt="Cafe Icon">
-          </div>
-          <div class="infographic-title">Cafe</div>
-          <div class="infographic-value" id="cafe-info">No data</div>
+      <button class="accordion">Facilities</button>
+      <div class="sidebar-container-1" > <!-- New container for grouping -->    
+        <div class="combined-visualization">
+          <h2>Facilities per Area</h2>
+          <canvas id="combined-chart" width="1600" height="800"></canvas>
         </div>
         
-        <div class="infographic-section">
-          <div class="infographic-icon">
-            <img src="https://w7.pngwing.com/pngs/310/448/png-transparent-study-skills-education-learning-computer-icons-sc-logo-angle-hat-teacher.png" alt="Education Icon">
+        <div class="infographic-container">
+          <div class="infographic-section">
+            <div class="infographic-icon">
+              <img src="https://cdn.icon-icons.com/icons2/510/PNG/512/coffee_icon-icons.com_50414.png" alt="Cafe Icon">
+            </div>
+            <div class="infographic-title">Cafe</div>
+            <div class="infographic-value" id="cafe-info">No data</div>
           </div>
-          <div class="infographic-title">Education</div>
-          <div class="infographic-value" id="education-info">No data</div>
+          
+          <div class="infographic-section">
+            <div class="infographic-icon">
+              <img src="https://w7.pngwing.com/pngs/310/448/png-transparent-study-skills-education-learning-computer-icons-sc-logo-angle-hat-teacher.png" alt="Education Icon">
+            </div>
+            <div class="infographic-title">Education</div>
+            <div class="infographic-value" id="education-info">No data</div>
+          </div>
         </div>
-      </div>
+      </div> <!-- End of new container -->
     </div>
   </div>
-
+  
   <!-- Modal for Enlarged Chart -->
   <div id="chart-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; z-index: 9999;">
     <div style="position: relative; width: 90%; max-width: 800px; background: #1f1f1f; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
