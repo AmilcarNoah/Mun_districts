@@ -422,7 +422,7 @@ const createLayerControl = () => {
 
 // Load all GeoJSON data
 const loadData = () => {
-  loadGeoJSON('map.geojson', loadDistrictData);
+  loadGeoJSON('Munich_Districts.geojson', loadDistrictData);
   loadGeoJSON('Train_network.geojson', loadTrainNetworkLayer);
   loadGeoJSON('Munich_Bus_Stops.geojson', loadBusStopsLayer);
 };
